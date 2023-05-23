@@ -32,7 +32,8 @@ function MyDocs() {
     // account they would like to use
     const account = accounts[0];
     console.log(account);
-    navigate('/Kenil/Docs');
+    alert("You are not authorized User")
+    navigate('/');
   };
 
   return (

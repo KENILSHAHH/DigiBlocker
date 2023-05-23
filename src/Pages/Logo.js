@@ -102,7 +102,7 @@ function Logo() {
             Store your docs on Polybase
           </h3>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Secured Governance
+            Future-Proof Your Documents: Safeguarded on the DigiBlocker
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
