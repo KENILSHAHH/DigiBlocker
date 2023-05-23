@@ -20,6 +20,8 @@ import { Appp } from './Huddle01';
 import IFrame from './Huddle01/IFrame';
 import MyComponent from './Pages/WhatsDapp';
 import Docs from './Pages/Docs';
+import MyDocs from './Pages/MyDocs';
+import Docss from './Docss';
 
 const client = createClient(
   getDefaultClient({
@@ -46,6 +48,14 @@ function App() {
             <Route
               path="/Docs"
               element={<LandingPage pageContents={Docs} />}
+            />
+            <Route
+              path="/MyDocs"
+              element={<LandingPage pageContents={MyDocs} />}
+            />
+            <Route
+              path="/Kenil/Docs"
+              element={<LandingPage pageContents={Docss} />}
             />
             {/* <Route
               path="/Input"

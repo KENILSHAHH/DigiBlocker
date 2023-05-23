@@ -1,4 +1,6 @@
-import React from 'react'
+/** @format */
+
+import React from 'react';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 
 import * as eth from '@polybase/eth';
@@ -16,25 +18,38 @@ const collectionReference = db.collection('Docs');
 const date = new Date();
 const auth = new Auth();
 function MyDocs() {
-    const navigate = useNavigate();
- const handleSubmit = async (event) => {
-  
-   event.preventDefault();
-   const msg = 'Sign to Access your Documents';
-   const sig = await auth.ethPersonalSign(msg);
-   console.log(sig);
-   const publicKey = await ethPersonalSignRecoverPublicKey(sig, msg);
-   console.log(publicKey);
-   const accounts = await eth.requestAccounts();
-   
-   // If there is more than one account, you may wish to ask the user which
-   // account they would like to use
-   const account = accounts[0];
-   console.log(account);
- 
- };
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const msg = 'Sign to Access your Documents';
+    const sig = await auth.ethPersonalSign(msg);
+    console.log(sig);
+    const publicKey = await ethPersonalSignRecoverPublicKey(sig, msg);
+    console.log(publicKey);
+    const accounts = await eth.requestAccounts();
 
-    return <button onCLick={handleSubmit} className="btn">Sign In to access the Documents that you own</button>;
+    // If there is more than one account, you may wish to ask the user which
+    // account they would like to use
+    const account = accounts[0];
+    console.log(account);
+    navigate('/Kenil/Docs');
+  };
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '150px',
+      }}>
+      <button
+        onClick={handleSubmit}
+        className="btn btn-active btn-primary">
+        Sign In to access the Documents that you own
+      </button>
+    </div>
+  );
 }
 
-export default MyDocs
+export default MyDocs;

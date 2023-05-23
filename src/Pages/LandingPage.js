@@ -69,9 +69,9 @@ const featuress = [
   },
 ];
 const navigation = [
-  { name: 'Add Contacts', href: '/RegisterUser' },
-  { name: 'Get Access to Video Call', href: '/NFTCard' },
-  { name: 'Start Chatting', href: '/Chat' },
+  { name: 'Store Documents', href: '/Docs' },
+  { name: 'View My Docs', href: '/MyDocs' },
+
 ];
 const db = new Polybase({
   defaultNamespace:
