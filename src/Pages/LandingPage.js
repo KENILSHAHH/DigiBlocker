@@ -14,6 +14,7 @@ import { useHuddle01 } from '@huddle01/react';
 import { useLobby, useRoom, useMeetingMachine } from '@huddle01/react/hooks';
 import { useEffect } from 'react';
 import teams from '../Assets/teams.svg';
+import docs from '../Assets/docs.svg';
 import { Auth } from '@polybase/auth';
 import {
   ArrowPathIcon,
@@ -71,7 +72,6 @@ const featuress = [
 const navigation = [
   { name: 'Store Documents', href: '/Docs' },
   { name: 'View My Docs', href: '/MyDocs' },
-
 ];
 const db = new Polybase({
   defaultNamespace:
@@ -131,7 +131,7 @@ export default function LandingPage({ pageContents: Content }) {
           <div
             className="flex lg:flex-1"
             style={{ height: '75px' }}>
-            <img src={teams} />
+            <img src={docs} />
           </div>
           {/* <div className="flex lg:flex-1">
             <button

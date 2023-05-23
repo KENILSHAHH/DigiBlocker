@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Logo from './Pages/Logo';
 import LandingPage from './Pages/LandingPage';
 import Input from './Pages/Input';
-import BAuth from './Biconomy/Auth';
+
 import { WagmiConfig, createClient } from 'wagmi';
 import { getDefaultClient, ConnectKitProvider } from 'connectkit';
 import NFTCard from './Components/NFTCard';

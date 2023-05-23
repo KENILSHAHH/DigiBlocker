@@ -6,16 +6,18 @@ import { useState } from 'react';
 import { ethPersonalSignRecoverPublicKey } from '@polybase/eth';
 import { Auth } from '@polybase/auth';
 import { Polybase } from '@polybase/client';
-
+import { useNavigate } from 'react-router-dom';
 const db = new Polybase({
   defaultNamespace:
     'pk/0x897b08efcd46e4843eb6041fd0ab956864d942bdeb6bcc4fbbef326ca9c2f03b906b3441d5f95b4cdeb475982fb795b97c19b6e363c2edb19b7f6dc5d48cfa2c/DigiBlocker',
 });
-const collectionReference = db.collection('Docs');
+const collectionReference = db.collection('Documents');
 const date = new Date();
 const auth = new Auth();
 
 function Docs() {
+    
+  const navigate = useNavigate();
   const [formInput, setFormInput] = useState({
     name: '',
 
@@ -50,20 +52,22 @@ function Docs() {
 
       // If there is more than one account, you may wish to ask the user which
       // account they would like to use
-      const account = accounts[0];
+      const account = accounts[0] + '';
       console.log(account);
       const sig = await eth.sign(data, account);
 
       return { h: 'eth-personal-sign', sig };
     });
     await db
-      .collection('Docs')
+      .collection('Documents')
       .create([
         date + '',
         formInput.docs,
-        'https://ipfs.io/ipfs/QmUkt9LhCpgP92hraygZAUXzDmkGUys3hvpQkjWcqTxq8A?filename=Screenshot%202023-05-23%20160027.png',
+        'https://ipfs.io/ipfs/QmSFkKsSh7f9JXMctbMP9GQo4VdKHSA8ZKhvciY2rTGieh?filename=Screenshot%202023-05-23%20185324.png',
+        account,
       ]);
-    alert('Done');
+      alert('Done');
+      navigate('/')
   };
   return (
     <div

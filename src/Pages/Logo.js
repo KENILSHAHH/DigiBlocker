@@ -1,5 +1,5 @@
 /** @format */
-
+import ima from '../ima.png';
 import React, { useEffect } from 'react';
 import RegisterUser from './RegisterUser.js';
 import { Polybase } from '@polybase/client';
@@ -23,48 +23,42 @@ const db = new Polybase({
 const dbref = db.collection('User');
 const features = [
   {
-    name: 'Push to deploy.',
+    name: 'Zero fees blockchain storage',
     description:
       'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates.',
+    name: 'Data Encryption',
     description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+      'DigiBlocker is using Polybase(built on zk-STARKs). It uses a zk-rollup combined with native indexing to allow decentralized database rules, fast queries and scalable writes.',
     icon: LockClosedIcon,
-  },
-  {
-    name: 'Database backups.',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-    icon: ServerIcon,
   },
 ];
 
 const featuress = [
   {
-    name: 'Push to deploy',
+    name: 'Upload to Polybase',
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Polybase use encryption and distributed ledger technologies to ensure the security and privacy of data. With Polybase, your documents are divided into smaller encrypted pieces and stored across multiple nodes, making it difficult for unauthorized access or tampering.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates',
+    name: 'Encrypted access',
     description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+      'Polybase provides transparency and immutability. Every modification made to the stored documents can be recorded on the blockchain, creating an auditable trail and enhancing trust in the system',
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple queues',
+    name: 'Data Ownership',
     description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+      'When you store your documents on Polybase, you retain ownership and control over your data. Unlike centralized systems where a single authority or organization has control, polybase allows you to manage and authorize access to your documents, reducing the risk of data misuse.',
     icon: ArrowPathIcon,
   },
   {
-    name: 'Advanced security',
+    name: 'Free Storage',
     description:
-      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+      'Unlike Other Blockchains, Storing Data on Polybase is completely free and doesnt cost you any gas fees',
     icon: FingerPrintIcon,
   },
 ];
@@ -309,16 +303,15 @@ function Logo() {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pr-8 lg:pt-4">
               <div className="lg:max-w-lg">
-                <h2 className="text-base font-semibold leading-7 text-indigo-600">
-                  Deploy faster
-                </h2>
+                A Free and
                 <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  A better workflow
+                  A Secure Storage
                 </p>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                  DigiBlocker facilitate easy access to your documents from
+                  anywhere, as long as you have an internet connection. You
+                  don't need to rely on physical copies or specific devices to
+                  access your Aadhaar card or government documents.
                 </p>
                 <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                   {features.map((feature) => (
@@ -339,7 +332,7 @@ function Logo() {
               </div>
             </div>
             <img
-              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+              src={ima}
               alt="Product screenshot"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
               width={2432}
@@ -353,16 +346,12 @@ function Logo() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-indigo-600">
-              Deploy faster
+              Store for Free
             </h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Everything you need to deploy your app
+              Secure your documents without any gasfees
             </p>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-              Suspendisse eget egestas a elementum pulvinar et feugiat blandit
-              at. In mi viverra elit nunc.
-            </p>
+            <p className="mt-6 text-lg leading-8 text-gray-600"></p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">

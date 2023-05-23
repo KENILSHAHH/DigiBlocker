@@ -42,7 +42,8 @@ function MyDocs() {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '150px',
-      }}>
+          }}>
+        
       <button
         onClick={handleSubmit}
         className="btn btn-active btn-primary">
