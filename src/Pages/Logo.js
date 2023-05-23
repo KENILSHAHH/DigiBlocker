@@ -3,6 +3,14 @@
 import React, { useEffect } from 'react';
 import RegisterUser from './RegisterUser.js';
 import { Polybase } from '@polybase/client';
+import * as eth from '@polybase/eth';
+import {
+  ArrowPathIcon,
+  CloudArrowUpIcon,
+  FingerPrintIcon,
+  LockClosedIcon,
+  ServerIcon,
+} from '@heroicons/react/24/outline';
 
 import { Fragment, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
@@ -10,10 +18,56 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useCollection } from '@polybase/react';
 const db = new Polybase({
   defaultNamespace:
-    'pk/0x428ddcf83c5607af5cc27cf24d2dcdb75a1bd4024183ccf40f2dd61c2aa325e7def2d9dbdd0022ecb8ccca68a19092bb8971dde6ab243fb76e796366b9be8a63/Huddle',
+    'pk/0x897b08efcd46e4843eb6041fd0ab956864d942bdeb6bcc4fbbef326ca9c2f03b906b3441d5f95b4cdeb475982fb795b97c19b6e363c2edb19b7f6dc5d48cfa2c/DigiBlocker',
 });
 const dbref = db.collection('User');
+const features = [
+  {
+    name: 'Push to deploy.',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: CloudArrowUpIcon,
+  },
+  {
+    name: 'SSL certificates.',
+    description:
+      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Database backups.',
+    description:
+      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    icon: ServerIcon,
+  },
+];
 
+const featuress = [
+  {
+    name: 'Push to deploy',
+    description:
+      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+    icon: CloudArrowUpIcon,
+  },
+  {
+    name: 'SSL certificates',
+    description:
+      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Simple queues',
+    description:
+      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+    icon: ArrowPathIcon,
+  },
+  {
+    name: 'Advanced security',
+    description:
+      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+    icon: FingerPrintIcon,
+  },
+];
 function Logo() {
   const [open, setOpen] = useState(false);
   async function makeTrue() {
@@ -41,36 +95,37 @@ function Logo() {
     setFormInput({ ...formInput, [event.target.name]: event.target.value });
   };
   return (
-    <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-40">
-      <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          WhatsDapp !
-        </h1>
-        <h3
-          style={{ marginTop: '40px', fontSize: '40px' }}
-          className="font-bold tracking-tight text-gray-900 sm:text-6xl">
-          Chatting and Video Calling just got more secure
-        </h3>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
-          Chat with your friends and family with the security of blockchain
-        </p>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
-          <a
-            href="/NFTCard"
-            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Get Premium Access
-          </a>
-          <>
-            <button
-              data-modal-target="authentication-modal"
-              data-modal-toggle="authentication-modal"
-              onClick={makeTrue}
-              type="button">
-              Register User ->
-            </button>
+    <div>
+      <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-40">
+        <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
+        <div className="text-center">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            DigiBlocker
+          </h1>
+          <h3
+            style={{ marginTop: '40px', fontSize: '40px' }}
+            className="font-bold tracking-tight text-gray-900 sm:text-6xl">
+            Store your docs on Polybase
+          </h3>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Secured Governance
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="/Docs"
+              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              Secure your Docs now
+            </a>
+            <>
+              <button
+                data-modal-target="authentication-modal"
+                data-modal-toggle="authentication-modal"
+                onClick={makeTrue}
+                type="button">
+                Register User ->
+              </button>
 
-            {/* <div
+              {/* <div
               id="authentication-modal"
               tabIndex="-1"
               aria-hidden="true"
@@ -145,107 +200,192 @@ function Logo() {
                 </div>
               </div>
             </div> */}
-            <Transition.Root
-              show={open}
-              as={Fragment}>
-              <Dialog
-                as="div"
-                className="relative z-10"
-                initialFocus={cancelButtonRef}
-                onClose={setOpen}>
-                <Transition.Child
-                  as={Fragment}
-                  enter="ease-out duration-300"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  leave="ease-in duration-200"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0">
-                  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                </Transition.Child>
+              <Transition.Root
+                show={open}
+                as={Fragment}>
+                <Dialog
+                  as="div"
+                  className="relative z-10"
+                  initialFocus={cancelButtonRef}
+                  onClose={setOpen}>
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0">
+                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                  </Transition.Child>
 
-                <div className="fixed inset-0 z-10 overflow-y-auto">
-                  <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                    <Transition.Child
-                      as={Fragment}
-                      enter="ease-out duration-300"
-                      enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                      enterTo="opacity-100 translate-y-0 sm:scale-100"
-                      leave="ease-in duration-200"
-                      leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                      leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                      <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                        <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                          <div className="sm:flex sm:items-start">
-                            <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                              <Dialog.Title
-                                as="h3"
-                                className="text-base font-semibold leading-6 text-gray-900">
-                                Sign UP
-                              </Dialog.Title>
-                              <div className="mt-2">
-                                <form
-                                  className="w-full"
-                                  action="#">
-                                  <div>
-                                    <label
-                                      htmlFor="email"
-                                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                      Your Wallet Address
-                                    </label>
-                                    <input
-                                      type="address"
-                                      name="address"
-                                      id="address"
-                                      onChange={handleChange}
-                                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                      placeholder="0x..."
-                                      required
-                                    />
-                                  </div>
-                                  <div>
-                                    <label
-                                      htmlFor="password"
-                                      className=" mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                      Your Name
-                                    </label>
-                                    <input
-                                      type="name"
-                                      name="name"
-                                      onChange={handleChange}
-                                      id="name"
-                                      placeholder="John"
-                                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                      required
-                                    />
-                                  </div>
-                                </form>
+                  <div className="fixed inset-0 z-10 overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                      <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        enterTo="opacity-100 translate-y-0 sm:scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                        <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                          <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                            <div className="sm:flex sm:items-start">
+                              <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                <Dialog.Title
+                                  as="h3"
+                                  className="text-base font-semibold leading-6 text-gray-900">
+                                  Sign UP
+                                </Dialog.Title>
+                                <div className="mt-2">
+                                  <form
+                                    className="w-full"
+                                    action="#">
+                                    <div>
+                                      <label
+                                        htmlFor="email"
+                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Your Wallet Address
+                                      </label>
+                                      <input
+                                        type="address"
+                                        name="address"
+                                        id="address"
+                                        onChange={handleChange}
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        placeholder="0x..."
+                                        required
+                                      />
+                                    </div>
+                                    <div>
+                                      <label
+                                        htmlFor="password"
+                                        className=" mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Your Name
+                                      </label>
+                                      <input
+                                        type="name"
+                                        name="name"
+                                        onChange={handleChange}
+                                        id="name"
+                                        placeholder="John"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        required
+                                      />
+                                    </div>
+                                  </form>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                          <button
-                            type="submit"
-                            onClick={handleSubmit}
-                            className="ml-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Sign to Register
-                          </button>
-                          <button
-                            type="button"
-                            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                            onClick={() => setOpen(false)}
-                            ref={cancelButtonRef}>
-                            Cancel
-                          </button>
-                        </div>
-                      </Dialog.Panel>
-                    </Transition.Child>
+                          <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <button
+                              type="submit"
+                              onClick={handleSubmit}
+                              className="ml-6 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              Sign to Register
+                            </button>
+                            <button
+                              type="button"
+                              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                              onClick={() => setOpen(false)}
+                              ref={cancelButtonRef}>
+                              Cancel
+                            </button>
+                          </div>
+                        </Dialog.Panel>
+                      </Transition.Child>
+                    </div>
                   </div>
+                </Dialog>
+              </Transition.Root>
+            </>
+          </div>
+        </div>
+      </div>
+      <div className="overflow-hidden py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            <div className="lg:pr-8 lg:pt-4">
+              <div className="lg:max-w-lg">
+                <h2 className="text-base font-semibold leading-7 text-indigo-600">
+                  Deploy faster
+                </h2>
+                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                  A better workflow
+                </p>
+                <p className="mt-6 text-lg leading-8 text-gray-600">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Maiores impedit perferendis suscipit eaque, iste dolor
+                  cupiditate blanditiis ratione.
+                </p>
+                <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                  {features.map((feature) => (
+                    <div
+                      key={feature.name}
+                      className="relative pl-9">
+                      <dt className="inline font-semibold text-gray-900">
+                        <feature.icon
+                          className="absolute left-1 top-1 h-5 w-5 text-indigo-600"
+                          aria-hidden="true"
+                        />
+                        {feature.name}
+                      </dt>{' '}
+                      <dd className="inline">{feature.description}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+            <img
+              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+              alt="Product screenshot"
+              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+              width={2432}
+              height={1442}
+            />
+          </div>
+        </div>
+      </div>
+      <div className=" py-24 sm:py-32">
+        {' '}
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-base font-semibold leading-7 text-indigo-600">
+              Deploy faster
+            </h2>
+            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Everything you need to deploy your app
+            </p>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
+              Suspendisse eget egestas a elementum pulvinar et feugiat blandit
+              at. In mi viverra elit nunc.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+              {featuress.map((feature) => (
+                <div
+                  key={feature.name}
+                  className="relative pl-16">
+                  <dt className="text-base font-semibold leading-7 text-gray-900">
+                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                      <feature.icon
+                        className="h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    {feature.name}
+                  </dt>
+                  <dd className="mt-2 text-base leading-7 text-gray-600">
+                    {feature.description}
+                  </dd>
                 </div>
-              </Dialog>
-            </Transition.Root>
-          </>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </div>

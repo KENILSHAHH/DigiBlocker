@@ -1,24 +1,82 @@
 /** @format */
-
+import { Polybase } from '@polybase/client';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
+import * as eth from '@polybase/eth';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '@polybase/react';
 import { useIsAuthenticated } from '@polybase/react';
 // import { ConnectKitButton } from 'connectkit';
 import { useAccount, useSignMessage } from 'wagmi';
+
 import { getAccessToken, getMessage } from '@huddle01/auth';
 import { useHuddle01 } from '@huddle01/react';
 import { useLobby, useRoom, useMeetingMachine } from '@huddle01/react/hooks';
 import { useEffect } from 'react';
 import teams from '../Assets/teams.svg';
 import { Auth } from '@polybase/auth';
+import {
+  ArrowPathIcon,
+  CloudArrowUpIcon,
+  FingerPrintIcon,
+  LockClosedIcon,
+  ServerIcon,
+} from '@heroicons/react/24/outline';
+const features = [
+  {
+    name: 'Push to deploy.',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: CloudArrowUpIcon,
+  },
+  {
+    name: 'SSL certificates.',
+    description:
+      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Database backups.',
+    description:
+      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    icon: ServerIcon,
+  },
+];
+const featuress = [
+  {
+    name: 'Push to deploy',
+    description:
+      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+    icon: CloudArrowUpIcon,
+  },
+  {
+    name: 'SSL certificates',
+    description:
+      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Simple queues',
+    description:
+      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+    icon: ArrowPathIcon,
+  },
+  {
+    name: 'Advanced security',
+    description:
+      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+    icon: FingerPrintIcon,
+  },
+];
 const navigation = [
   { name: 'Add Contacts', href: '/RegisterUser' },
   { name: 'Get Access to Video Call', href: '/NFTCard' },
   { name: 'Start Chatting', href: '/Chat' },
 ];
-
+const db = new Polybase({
+  defaultNamespace:
+    'pk/0x897b08efcd46e4843eb6041fd0ab956864d942bdeb6bcc4fbbef326ca9c2f03b906b3441d5f95b4cdeb475982fb795b97c19b6e363c2edb19b7f6dc5d48cfa2c/DigiBlocker',
+});
 export const authh = '';
 export default function LandingPage({ pageContents: Content }) {
   const { initialize, isInitialized } = useHuddle01();
@@ -34,7 +92,18 @@ export default function LandingPage({ pageContents: Content }) {
   // }, []);
   async function signIn() {
     const some = await auth.signIn();
+    db.signer(async (data) => {
+      // A permission dialog will be presented to the user
+      const accounts = await eth.requestAccounts();
 
+      // If there is more than one account, you may wish to ask the user which
+      // account they would like to use
+      const account = accounts[0];
+
+      const sig = await eth.sign(data, account);
+
+      return { h: 'eth-personal-sign', sig };
+    });
     console.log(state);
   }
   // const { signMessage } = useSignMessage({
@@ -176,7 +245,7 @@ export default function LandingPage({ pageContents: Content }) {
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true">
           <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#000dff] to-[#00b7ff] opacity-70 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#00ffdd] to-[#00ffcc] opacity-70 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
             style={{
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
@@ -184,11 +253,12 @@ export default function LandingPage({ pageContents: Content }) {
           />
         </div>
         <Content />
+
         <div
           className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
           aria-hidden="true">
           <div
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#2b00ff] to-[#00bfff] opacity-70 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ea00ff] to-[#66ff00] opacity-70 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             style={{
               clipPath:
                 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',

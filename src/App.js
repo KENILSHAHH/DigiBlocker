@@ -19,6 +19,7 @@ import RegisterUser from './Pages/RegisterUser';
 import { Appp } from './Huddle01';
 import IFrame from './Huddle01/IFrame';
 import MyComponent from './Pages/WhatsDapp';
+import Docs from './Pages/Docs';
 
 const client = createClient(
   getDefaultClient({
@@ -41,6 +42,10 @@ function App() {
             <Route
               path="/"
               element={<LandingPage pageContents={Logo} />}
+            />
+            <Route
+              path="/Docs"
+              element={<LandingPage pageContents={Docs} />}
             />
             {/* <Route
               path="/Input"
